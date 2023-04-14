@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.22)
+project(HNN)
+add_subdirectory(common)
+include_directories(common/thirdparty/spdlog/include)
+include_directories(common/include/tensor)
+include_directories(common/include/data_manager)
+include_directories(common/include/log)
+
+set(CMAKE_CXX_STANDARD 11)
+add_executable(HNN main.cpp)
