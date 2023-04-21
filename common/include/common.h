@@ -6,4 +6,12 @@
 #define HNN_COMMON_H
 #include <stdint.h>
 #include <memory>
+#include "log.h"
+#include "stdlib.h"
+
+#define ALIGNMENT_32 32
+void *alignedMalloc(unsigned long size, int alignment);
+
+void alignedFree(void *aligned);
+
 #endif //HNN_COMMON_H

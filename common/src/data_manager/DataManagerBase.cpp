@@ -3,3 +3,8 @@
 //
 #include "DataManagerBase.h"
 #include "TensorBase.h"
+
+namespace HNN {
+
+
+}

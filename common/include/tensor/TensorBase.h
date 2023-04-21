@@ -7,21 +7,31 @@
 
 #include <vector>
 #include <string>
-
+#include "DataManagerBase.h"
 namespace HNN {
-    using ShapeVector = std::vector<uint32_t>;
+    using ShapeVector = std::vector< uint32_t >;
 
     class TensorBase {
     public:
-//        TensorBase();
+        TensorBase();
 //
-//        virtual ~TensorBase();
+        virtual ~TensorBase(){};
 //
-//        TensorBase(const ShapeVector &shape);
+        TensorBase(const ShapeVector &shape, DataManagerBasePtr dataManagerBasePtr);
+
+        template< typename T > inline T* getData(const uint32_t size = 0) const {
+            if (mShape.empty() || mDataManagerPtr == nullptr) {
+                     //DataManagerBasePtr
+                return nullptr;
+            }
+
+
+        }
 
     private:
         std::string mName;
         ShapeVector mShape;
+        DataManagerBasePtr mDataManagerPtr;
 
     };
 }

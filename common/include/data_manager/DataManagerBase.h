@@ -9,7 +9,10 @@
 namespace HNN {
 
     class DataManagerBase {
-
+    public:
+        virtual ~DataManagerBase(){}
+        virtual void* malloc(const uint32_t size) = 0;
+        virtual void free(void* p) = 0;
     };
     using DataManagerBasePtr = std::shared_ptr< DataManagerBase >;
 }
