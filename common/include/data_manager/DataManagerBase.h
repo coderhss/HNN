@@ -13,6 +13,11 @@ namespace HNN {
         virtual ~DataManagerBase(){}
         virtual void* malloc(const uint32_t size) = 0;
         virtual void free(void* p) = 0;
+        virtual void* getData() { return (void*)mData.get(); };
+
+    protected:
+        std::shared_ptr< uint8_t > mData = std::make_shared< uint8_t >();
+        uint32_t mSize = 0;
     };
     using DataManagerBasePtr = std::shared_ptr< DataManagerBase >;
 }

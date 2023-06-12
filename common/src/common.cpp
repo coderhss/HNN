@@ -2,7 +2,9 @@
 // Created by bryab on 23-4-16.
 //
 #include "common.h"
+#include <mutex>
 
+static std::mutex mtx;
 void *alignedMalloc(unsigned long size, int alignment) {
     const int pointerSize = sizeof(void *);
     const int requestSize = size + alignment - 1 + pointerSize;
@@ -21,6 +23,7 @@ void *alignedMalloc(unsigned long size, int alignment) {
 }
 
 void alignedFree(void *aligned) {
+    std::unique_lock< std::mutex >lck(mtx);
     if (aligned == nullptr) {
         LOG_W("aligned mem free aligned pointer is null.");
         return;

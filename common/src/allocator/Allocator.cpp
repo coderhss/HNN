@@ -18,6 +18,7 @@ namespace HNN {
         std::unique_lock< std::mutex > lck(mtx);
         if (pointer == nullptr) {
             LOG_W("fast free ptr is null.");
+            return;
         }
         alignedFree(pointer);
         pointer = nullptr;

@@ -9,14 +9,20 @@ namespace HNN {
         if (newPointer == nullptr) {
             LOG_E("fast malloc ptr is null.");
         }
+        mSize = size;
+        mData.reset((uint8_t*)newPointer, [&](uint8_t* p){
+            alignedFree(p);
+//            delete p;
+            mSize = 0;
+        });
         return newPointer;
     }
 
     void DataManagerCommon::free(void *pointer) {
-        std::unique_lock< std::mutex > lck(mtx);
         if (pointer == nullptr) {
             LOG_W("fast free ptr is null.");
         }
+        mSize = 0;
         alignedFree(pointer);
         pointer = nullptr;
     }

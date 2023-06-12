@@ -1,6 +1,6 @@
 set(target_name common)
 
-add_library(${target_name} STATIC src/data_manager/DataManagerBase.cpp src/tensor/Tensor.cpp src/tensor/TensorBase.cpp src/allocator/Allocator.cpp src/common.cpp src/data_manager/DataManagerCommon.cpp)
+add_library(${target_name} STATIC src/data_manager/DataManagerBase.cpp src/tensor/Tensor.cpp src/tensor/TensorBase.cpp src/allocator/Allocator.cpp src/common.cpp src/data_manager/DataManagerCommon.cpp include/core/ErrorCode.h include/core/DataType.h include/core/CommonFactory.h)
 
 file(GLOB_RECURSE sub_files ${CMAKE_CURRENT_SOURCE_DIR}/include)
 message(${target_name})

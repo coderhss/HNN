@@ -6,8 +6,21 @@
 #define HNN_TENSOR_H
 #include "TensorBase.h"
 namespace HNN {
+    #define NCHW ("NCHW")
+    #define NHWC ("NHWC")
     class Tensor : public TensorBase {
+    public:
+        Tensor() = default;
 
+        virtual ~Tensor(){};
+
+        Tensor(const ShapeVector &shape, DataManagerBasePtr dataManagerBasePtr);
+
+        inline std::string getMemoryFormat() const {
+            return mMemoryFormat;
+        }
+    private:
+        std::string mMemoryFormat = NCHW;
     };
 }
 
