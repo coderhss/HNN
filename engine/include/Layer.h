@@ -14,7 +14,6 @@ namespace HNN {
 
         virtual ErrorCode load_param() = 0;
 
-
     };
 }
 #endif //HNN_LAYER_H

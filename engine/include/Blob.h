@@ -6,6 +6,7 @@
 #define HNN_BLOB_H
 #include <string>
 #include "common.h"
+#include "DataReader.h"
 namespace HNN {
     class Blob {
     public:

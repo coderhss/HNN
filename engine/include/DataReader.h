@@ -4,5 +4,29 @@
 
 #ifndef HNN_DATAREADER_H
 #define HNN_DATAREADER_H
+#include "common.h"
+namespace HNN {
+    using FilePtr = std::shared_ptr< FILE >;
+    class DataReader {
+    public:
+        DataReader() = default;
 
+        virtual ~DataReader() = default;
+
+        virtual ErrorCode scan(const std::string& format, void* data) const = 0;
+
+    };
+
+    class DataReaderFromStdio : public DataReader {
+    public:
+        explicit DataReaderFromStdio(FilePtr file);
+        virtual ~DataReaderFromStdio() = default;
+
+        ErrorCode scan(const std::string& format, void* data) const override;
+
+    private:
+        FilePtr filePtr;
+    };
+    using DataReaderPtr = std::shared_ptr< DataReader >;
+}
 #endif //HNN_DATAREADER_H
