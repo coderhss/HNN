@@ -19,7 +19,10 @@ namespace HNN {
                 fclose(p);
                 filePointer = nullptr;
             });
-            loadParam(file);
+            auto ret = loadParam(file);
+            if (ret != ErrorCode::NN_OK) {
+                LOG_E("load param is filed.");
+            }
         }
         return ErrorCode::NN_OK;
     }
