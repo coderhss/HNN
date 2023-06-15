@@ -51,7 +51,7 @@ public:
         std::shared_ptr< namespaces::classbase > creator_##key##_##classname() {            \
             return std::shared_ptr< namespaces::classbase >(new namespaces::classname());   \
         }                                                                                   \
-        statiic CommonRegister< namespaces::classbase >                                     \
+        static CommonRegister< namespaces::classbase >                                      \
                 g_creator_##key##_##classname(#key, creator_##key##_##classname);           \
     }
 

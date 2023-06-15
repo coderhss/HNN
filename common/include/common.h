@@ -9,6 +9,7 @@
 #include "log.h"
 #include <stdlib.h>
 #include "core/ErrorCode.h"
+#include "core/CommonFactory.h"
 
 #define ALIGNMENT_32 32
 void *alignedMalloc(unsigned long size, int alignment);

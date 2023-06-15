@@ -12,8 +12,15 @@ namespace HNN {
 
         virtual ~Layer(){};
 
-        virtual ErrorCode load_param() = 0;
+        virtual ErrorCode load_param();
 
+        std::string type;
+
+        std::string name;
+
+        std::vector< uint32_t > bottoms;
+
+        std::vector< uint32_t > tops;
     };
 }
 #endif //HNN_LAYER_H

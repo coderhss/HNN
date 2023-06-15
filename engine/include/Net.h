@@ -17,6 +17,10 @@ namespace HNN {
 
         ErrorCode loadParam(const std::string& filePath);
 
+        ErrorCode loadParam(DataReaderPtr dataReader);
+
+        std::vector< Blob > blobs;
+        std::vector< Layer > layers;
     };
 
 }
