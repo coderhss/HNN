@@ -46,7 +46,7 @@ namespace HNN {
         // parse header
         int magic = 0;
         SCAN_VALUE("%d", magic);
-        if (magic != 7767517) {
+        if (magic != 1314) {
             LOG_E("param is too old");
             return ErrorCode::NN_FAILED;
         }
@@ -63,7 +63,7 @@ namespace HNN {
 
         this->blobs.resize(blobNumber);
         this->layers.resize(layoutNumber);
-
+        uint32_t currentBlobIndex = 0;
         for (uint32_t i = 0; i < layoutNumber; ++i) {
             char layerType[256], layerName[256];
             uint32_t bottomNumber = 0, topNumber = 0;
@@ -84,19 +84,69 @@ namespace HNN {
             layer->name = std::string(layerName);
 
             layer->bottoms.resize(bottomNumber);
+            layer->tops.resize(topNumber);
 
             for (uint32_t j = 0; j < bottomNumber; ++j) {
                 char bottomName[256];
                 SCAN_VALUE("%255s", bottomName);
+                std::string bottomNameString = std::string(bottomName);
 
+                auto bottomBlobIndex = getIndexFromBlobName(bottomNameString);
 
+                if (bottomBlobIndex == -1) {
+                    BlobPtr& blob = this->blobs[currentBlobIndex];
+                    blob.reset(new Blob());
+                    blob->name = bottomNameString;
+                    blobName2Index[bottomNameString] = currentBlobIndex;
+                    bottomBlobIndex = static_cast< int >(currentBlobIndex);
+                    currentBlobIndex ++;
+                }
 
-
+                this->blobs[bottomBlobIndex]->consumer = i;
+                layer->bottoms[j] = bottomBlobIndex;
             }
+
+            for (uint32_t j = 0; j < topNumber; ++j) {
+                char topName[256];
+                SCAN_VALUE("%255s", topName);
+                std::string topNameString = std::string(topName);
+
+                auto topBlobIndex = getIndexFromBlobName(topName);
+
+                if (topBlobIndex == -1) {
+                    BlobPtr& blob = this->blobs[currentBlobIndex];
+                    blob.reset(new Blob());
+                    blob->name = topNameString;
+                    blobName2Index[topNameString] = currentBlobIndex;
+                    topBlobIndex = static_cast< int >(currentBlobIndex);
+                    currentBlobIndex ++;
+                }
+
+                this->blobs[topBlobIndex]->producer = i;
+                layer->tops[j] = topBlobIndex;
+            }
+
 
         }
 
         return ErrorCode::NN_OK;
+    }
+
+    int Net::getIndexFromBlobName(const std::string &name) {
+        if (this->blobName2Index.find(name) == this->blobName2Index.end()) {
+            LOG_D("cannot find blob by name {}.", name);
+            return -1;
+        }
+        return this->blobName2Index.at(name);
+    }
+
+    BlobPtr Net::getBlobFromName(const std::string &name) {
+        auto index = getIndexFromBlobName(name);
+        if (index == -1 || index >= this->blobs.size()) {
+            LOG_D("index is invalid, index: {}, blob size: {}", index, blobs.size());
+            return nullptr;
+        }
+        return blobs.at(index);
     }
 
 }

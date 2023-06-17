@@ -6,6 +6,7 @@
 #include "DataManagerCommon.h"
 #include "Allocator.h"
 #include "gtest/gtest.h"
+#include "Net.h"
 
 class Test : public testing::TestWithParam<int> {
 
@@ -23,12 +24,18 @@ TEST(test, test) {
 std::vector<int> a{0, 1, 2};
 INSTANTIATE_TEST_CASE_P(TestSuitName, Test, testing::ValuesIn(a));
 
-int main() {
+int main(int argc, char* argv[]) {
     ::testing::InitGoogleTest();
     RUN_ALL_TESTS();
 //    HNN::DataManagerBasePtr a;
     HNN::DataManagerCommon dataMgr;
     dataMgr.malloc(100 * sizeof (int));
+    HNN::Net net;
+    std::string path = "";
+    if (argc > 1) {
+        path = argv[1];
+    }
+    net.loadParam(path);
 
 
     LOG_I("TEst {}", 1);

@@ -16,5 +16,6 @@ namespace HNN {
         int consumer;
 
     };
+    using BlobPtr = std::shared_ptr< Blob >;
 }
 #endif //HNN_BLOB_H

@@ -19,8 +19,13 @@ namespace HNN {
 
         ErrorCode loadParam(DataReaderPtr dataReader);
 
-        std::vector< Blob > blobs;
-        std::vector< Layer > layers;
+        inline int getIndexFromBlobName(const std::string& name);
+
+        inline BlobPtr getBlobFromName(const std::string& name);
+
+        std::vector< BlobPtr > blobs;
+        std::unordered_map< std::string, uint32_t > blobName2Index;
+        std::vector< LayerPtr > layers;
     };
 
 }

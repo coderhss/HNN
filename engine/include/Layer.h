@@ -22,5 +22,6 @@ namespace HNN {
 
         std::vector< uint32_t > tops;
     };
+    using LayerPtr = std::shared_ptr< Layer >;
 }
 #endif //HNN_LAYER_H

@@ -9,35 +9,40 @@
 
 #define _LOG_D(msg, ...)                                            \
     do {                                                            \
-        std::string tag = "[" + std::string(__FILE__) + "] "        \
+        std::string tag = "[" + std::string(__FILE__) + ":"         \
+                            + std::to_string(__LINE__) + "] "       \
                             + std::string(msg);                     \
         spdlog::debug(tag, ##__VA_ARGS__);                          \
     } while(0)
 
 #define _LOG_I(msg, ...)                                            \
     do {                                                            \
-        std::string tag = "[" + std::string(__FILE__) + "] "        \
+        std::string tag = "[" + std::string(__FILE__) + ":"         \
+                            + std::to_string(__LINE__) + "] "       \
                             + std::string(msg);                     \
         spdlog::info(tag, ##__VA_ARGS__);                           \
     } while(0)
 
 #define _LOG_W(msg, ...)                                            \
     do {                                                            \
-        std::string tag = "[" + std::string(__FILE__) + "] "        \
+        std::string tag = "[" + std::string(__FILE__) + ":"         \
+                            + std::to_string(__LINE__) + "] "       \
                             + std::string(msg);                     \
         spdlog::warn(tag, ##__VA_ARGS__);                           \
     } while(0)
 
 #define _LOG_E(msg, ...)                                            \
     do {                                                            \
-        std::string tag = "[" + std::string(__FILE__) + "] "        \
+        std::string tag = "[" + std::string(__FILE__) + ":"         \
+                            + std::to_string(__LINE__) + "] "       \
                             + std::string(msg);                     \
         spdlog::error(tag, ##__VA_ARGS__);                          \
     } while(0)
 
 #define _LOG_T(msg, ...)                                            \
     do {                                                            \
-        std::string tag = "[" + std::string(__FILE__) + "] "        \
+        std::string tag = "[" + std::string(__FILE__) + ":"         \
+                            + std::to_string(__LINE__) + "] "       \
                             + std::string(msg);                     \
         spdlog::trace(tag, ##__VA_ARGS__);                          \
     } while(0)
