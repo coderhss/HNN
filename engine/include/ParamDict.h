@@ -10,8 +10,8 @@ namespace HNN {
     typedef struct {
         uint32_t type;
         union {
-            int i;
-            float f;
+            int intValue;
+            float floatValue;
         };
 
     } Param;
