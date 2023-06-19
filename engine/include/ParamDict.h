@@ -5,6 +5,7 @@
 #ifndef HNN_PARAMDICT_H
 #define HNN_PARAMDICT_H
 #include "common.h"
+#include "DataReader.h"
 #define HNN_MAX_PARAM_COUNT 32
 namespace HNN {
     typedef struct {
@@ -15,6 +16,8 @@ namespace HNN {
         };
 
     } Param;
+    using ParamPtr = std::shared_ptr< Param >;
+    using ParamVec = std::vector< ParamPtr >;
 
     class ParamDict {
         ParamDict();
@@ -31,6 +34,12 @@ namespace HNN {
 
         void set(int id, float value);
 
+        ErrorCode loadParam(DataReaderPtr dataReader);
+
+        ErrorCode loadParamBin(DataReaderPtr dataReader);
+
+    private:
+        ParamVec params;
     };
 }
 #endif //HNN_PARAMDICT_H

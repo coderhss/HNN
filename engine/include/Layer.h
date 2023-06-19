@@ -8,11 +8,11 @@
 namespace HNN {
     class Layer {
     public:
-        Layer();
+        Layer() = default;
 
         virtual ~Layer(){};
 
-        virtual ErrorCode load_param();
+        virtual ErrorCode loadParam();
 
         std::string type;
 

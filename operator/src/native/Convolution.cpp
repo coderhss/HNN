@@ -3,3 +3,12 @@
 //
 
 #include "Layer.h"
+#include "Convolution.h"
+
+namespace HNN {
+
+    ErrorCode Convolution::loadParam() {
+        return ErrorCode::NN_OK;
+    }
+
+}

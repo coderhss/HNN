@@ -4,7 +4,7 @@
 #include "Layer.h"
 
 namespace HNN {
-    ErrorCode Layer::load_param() {
+    ErrorCode Layer::loadParam() {
         return ErrorCode::NN_OK;
     }
 }

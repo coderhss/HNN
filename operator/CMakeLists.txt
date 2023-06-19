@@ -1,6 +1,6 @@
 set(targetName operator)
 
-add_library(${targetName} STATIC src/native/Convolution.cpp include/register.h include/native/NativeRegistor.h)
+add_library(${targetName} STATIC src/native/Convolution.cpp include/register.h include/native/NativeRegistor.h include/native/Input.h src/native/Input.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common/thirdparty/spdlog/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common/thirdparty/googletest/googletest/include)

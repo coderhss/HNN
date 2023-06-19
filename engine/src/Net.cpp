@@ -109,21 +109,13 @@ namespace HNN {
             for (uint32_t j = 0; j < topNumber; ++j) {
                 char topName[256];
                 SCAN_VALUE("%255s", topName);
-                std::string topNameString = std::string(topName);
 
-                auto topBlobIndex = getIndexFromBlobName(topName);
+                auto& blob = this->blobs[currentBlobIndex];
 
-                if (topBlobIndex == -1) {
-                    BlobPtr& blob = this->blobs[currentBlobIndex];
-                    blob.reset(new Blob());
-                    blob->name = topNameString;
-                    blobName2Index[topNameString] = currentBlobIndex;
-                    topBlobIndex = static_cast< int >(currentBlobIndex);
-                    currentBlobIndex ++;
-                }
-
-                this->blobs[topBlobIndex]->producer = i;
-                layer->tops[j] = topBlobIndex;
+                blob->name = std::string(topName);
+                blob->producer = i;
+                layer->tops[j] = currentBlobIndex;
+                currentBlobIndex ++;
             }
 
 

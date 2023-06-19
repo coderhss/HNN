@@ -7,6 +7,7 @@
 #include "Allocator.h"
 #include "gtest/gtest.h"
 #include "Net.h"
+#include "register.h"
 
 class Test : public testing::TestWithParam<int> {
 

@@ -9,7 +9,8 @@ namespace HNN {
         int ret = fscanf(filePtr.get(), format.c_str(), data);
         LOG_D("read data num is: {}", ret);
         if (ret <= 0) {
-            LOG_W("read data num is: {}", ret);
+            LOG_W("read data {} num is: {}",format, ret);
+            return ErrorCode::NN_FAILED;
         }
         return ErrorCode::NN_OK;
     }
