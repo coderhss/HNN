@@ -20,7 +20,10 @@ namespace HNN {
     using ParamVec = std::vector< ParamPtr >;
 
     class ParamDict {
-        ParamDict();
+    public:
+        ParamDict() {
+            params.resize(HNN_MAX_PARAM_COUNT);
+        };
 
         virtual ~ParamDict() {};
 

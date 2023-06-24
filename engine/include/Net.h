@@ -5,6 +5,7 @@
 #ifndef HNN_NET_H
 #define HNN_NET_H
 #include "Layer.h"
+#include "ParamDict.h"
 namespace HNN {
 
     class Net {

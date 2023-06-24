@@ -111,13 +111,18 @@ namespace HNN {
                 SCAN_VALUE("%255s", topName);
 
                 auto& blob = this->blobs[currentBlobIndex];
-
+                if (blob == nullptr) {
+                    blob.reset(new Blob());
+                }
                 blob->name = std::string(topName);
+                blobName2Index[blob->name] = currentBlobIndex;
                 blob->producer = i;
                 layer->tops[j] = currentBlobIndex;
                 currentBlobIndex ++;
             }
 
+            ParamDict paramDict;
+            paramDict.loadParam(dataReader);
 
         }
 
@@ -125,8 +130,9 @@ namespace HNN {
     }
 
     int Net::getIndexFromBlobName(const std::string &name) {
+        LOG_D("find index of blob name: {}", name);
         if (this->blobName2Index.find(name) == this->blobName2Index.end()) {
-            LOG_D("cannot find blob by name {}.", name);
+            LOG_E("cannot find blob by name {}.", name);
             return -1;
         }
         return this->blobName2Index.at(name);
