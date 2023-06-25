@@ -9,7 +9,7 @@
 
 namespace HNN {
     class Convolution : public Layer {
-        ErrorCode loadParam() override;
+        ErrorCode loadParam(ParamDict& paramDict) override;
     };
 }
 

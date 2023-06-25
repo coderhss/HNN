@@ -124,6 +124,7 @@ namespace HNN {
             ParamDict paramDict;
             paramDict.loadParam(dataReader);
 
+            layer->loadParam(paramDict);
         }
 
         return ErrorCode::NN_OK;

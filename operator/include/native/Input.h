@@ -7,8 +7,13 @@
 #include "Layer.h"
 namespace HNN {
     class Input : public Layer {
+    public:
+        ErrorCode loadParam(ParamDict& paramDict) override;
 
-        ErrorCode loadParam() override;
+        uint32_t width{0};
+        uint32_t height{0};
+        uint32_t depth{0};
+        uint32_t channel{0};
     };
 }
 #endif //HNN_INPUT_H

@@ -5,6 +5,8 @@
 #ifndef HNN_LAYER_H
 #define HNN_LAYER_H
 #include "Blob.h"
+#include "ParamDict.h"
+
 namespace HNN {
     class Layer {
     public:
@@ -12,7 +14,7 @@ namespace HNN {
 
         virtual ~Layer(){};
 
-        virtual ErrorCode loadParam();
+        virtual ErrorCode loadParam(ParamDict& paramDict);
 
         std::string type;
 

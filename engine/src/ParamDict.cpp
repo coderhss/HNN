@@ -82,11 +82,17 @@ namespace HNN {
     }
 
     int ParamDict::get(int id, int defaultValue) const {
-        return 0;
+        if (params[id] == nullptr) {
+            return defaultValue;
+        }
+        return params[id]->type ? params[id]->intValue : defaultValue;
     }
 
     float ParamDict::get(int id, float defaultValue) const {
-        return 0;
+        if (params[id] == nullptr) {
+            return defaultValue;
+        }
+        return params[id]->type ? params[id]->floatValue : defaultValue;
     }
 
     void ParamDict::set(int id, int value) {
