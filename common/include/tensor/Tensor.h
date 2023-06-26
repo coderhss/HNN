@@ -22,6 +22,7 @@ namespace HNN {
     private:
         std::string mMemoryFormat = NCHW;
     };
+    using TensorPtr = std::shared_ptr< Tensor >;
 }
 
 #endif //HNN_TENSOR_H
