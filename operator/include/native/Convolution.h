@@ -5,12 +5,13 @@
 #ifndef HNN_CONVOLUTION_H
 #define HNN_CONVOLUTION_H
 #include "Layer.h"
+#include "Tensor.h"
 
 
 namespace HNN {
     class Convolution : public Layer {
     public:
-        ErrorCode loadParam(ParamDict& paramDict) override;
+        ErrorCode loadParam(const ParamDict& paramDict) override;
 
         uint32_t kernelWidth{0};
         uint32_t kernelHeight{0};

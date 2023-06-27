@@ -7,7 +7,7 @@
 
 namespace HNN {
 
-    ErrorCode Convolution::loadParam(ParamDict& paramDict) {
+    ErrorCode Convolution::loadParam(const ParamDict& paramDict) {
         return ErrorCode::NN_OK;
     }
 

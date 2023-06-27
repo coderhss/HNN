@@ -4,7 +4,7 @@
 #include "Input.h"
 
 namespace HNN {
-    ErrorCode Input::loadParam(ParamDict& paramDict) {
+    ErrorCode Input::loadParam(const ParamDict& paramDict) {
         width = paramDict.get(0, 0);
         LOG_D("Input width: {}", width);
         height = paramDict.get(1, 0);

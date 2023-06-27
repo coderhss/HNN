@@ -20,6 +20,12 @@ namespace HNN {
 
         ErrorCode loadParam(DataReaderPtr dataReader);
 
+        ErrorCode loadModel(FilePtr file);
+
+        ErrorCode loadModel(const std::string& filePath);
+
+        ErrorCode loadModel(DataReaderPtr dataReader);
+
         inline int getIndexFromBlobName(const std::string& name);
 
         inline BlobPtr getBlobFromName(const std::string& name);

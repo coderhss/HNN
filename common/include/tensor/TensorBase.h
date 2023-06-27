@@ -13,7 +13,7 @@ namespace HNN {
 
     class TensorBase {
     public:
-        TensorBase();
+        TensorBase() = default;
 //
         virtual ~TensorBase(){};
 //

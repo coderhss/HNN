@@ -6,3 +6,13 @@
 #define HNN_MODELBIN_H
 
 #endif //HNN_MODELBIN_H
+namespace HNN {
+    class ModelBin {
+    public:
+        ModelBin() = default;
+
+        virtual ~ModelBin() = default;
+
+
+    };
+}

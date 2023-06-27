@@ -14,7 +14,9 @@ namespace HNN {
 
         virtual ~Layer(){};
 
-        virtual ErrorCode loadParam(ParamDict& paramDict);
+        virtual ErrorCode loadParam(const ParamDict& paramDict);
+
+//        virtual ErrorCode loadModel(const );
 
         std::string type;
 

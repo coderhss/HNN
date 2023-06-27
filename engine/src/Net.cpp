@@ -8,7 +8,7 @@ namespace HNN {
         auto ret = loadParam(dataReader);
         if (ret != ErrorCode::NN_OK) {
             LOG_E("load data from stdio failed.");
-            return ErrorCode::NN_FAILED;
+            return ret;
         }
         return ErrorCode::NN_OK;
     }
@@ -28,7 +28,7 @@ namespace HNN {
             auto ret = loadParam(file);
             if (ret != ErrorCode::NN_OK) {
                 LOG_E("load param is filed.");
-                return ErrorCode::NN_FAILED;
+                return ret;
             }
         }
         return ErrorCode::NN_OK;
@@ -147,5 +147,47 @@ namespace HNN {
         }
         return blobs.at(index);
     }
+
+    ErrorCode Net::loadModel(FilePtr file) {
+        DataReaderPtr dataReader = std::make_shared< DataReaderFromStdio >(file);
+        auto ret = loadModel(dataReader);
+        if (ret != ErrorCode::NN_OK) {
+            LOG_D("load model failed.");
+            return ret;
+        }
+        return ErrorCode::NN_OK;
+    }
+
+    ErrorCode Net::loadModel(const std::string &filePath) {
+        FILE* filePointer = std::fopen(filePath.c_str(), "rb");
+        if (filePointer == nullptr) {
+            LOG_E("model file {} open failed.", filePath);
+            return ErrorCode::NN_FAILED;
+        }
+
+        {
+            FilePtr file(filePointer, [&](FILE* p) {
+                std::fclose(p);
+                filePointer = nullptr;
+            });
+
+            auto ret = loadModel(file);
+            if (ret != ErrorCode::NN_OK) {
+                LOG_E("load model {} filed.", filePath);
+                return ret;
+            }
+            return ErrorCode::NN_OK;
+        }
+        return ErrorCode::NN_FAILED;
+    }
+
+    ErrorCode Net::loadModel(DataReaderPtr dataReader) {
+        if (layers.empty()) {
+            LOG_E("layer is empty, please call loadParam before loadModel.");
+            return ErrorCode::NN_FAILED;
+        }
+        return ErrorCode::NN_FAILED;
+    }
+
 
 }

@@ -8,7 +8,7 @@
 namespace HNN {
     class Input : public Layer {
     public:
-        ErrorCode loadParam(ParamDict& paramDict) override;
+        ErrorCode loadParam(const ParamDict& paramDict) override;
 
         uint32_t width{0};
         uint32_t height{0};
