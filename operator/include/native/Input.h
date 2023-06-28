@@ -10,6 +10,8 @@ namespace HNN {
     public:
         ErrorCode loadParam(const ParamDict& paramDict) override;
 
+        ErrorCode loadModel(ModelBinPtr modelBin) override;
+
         uint32_t width{0};
         uint32_t height{0};
         uint32_t depth{0};

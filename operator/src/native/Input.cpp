@@ -12,4 +12,8 @@ namespace HNN {
         channel = paramDict.get(2, 0);
         return ErrorCode::NN_OK;
     }
+
+    ErrorCode Input::loadModel(ModelBinPtr modelBin) {
+        return Layer::loadModel(modelBin);
+    }
 }

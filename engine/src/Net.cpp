@@ -178,7 +178,6 @@ namespace HNN {
             }
             return ErrorCode::NN_OK;
         }
-        return ErrorCode::NN_FAILED;
     }
 
     ErrorCode Net::loadModel(DataReaderPtr dataReader) {
@@ -186,7 +185,21 @@ namespace HNN {
             LOG_E("layer is empty, please call loadParam before loadModel.");
             return ErrorCode::NN_FAILED;
         }
-        return ErrorCode::NN_FAILED;
+
+        uint32_t layerNum = layers.size();
+
+        ModelBinPtr modelBin = std::make_shared< ModelBinFromDataReader >(dataReader);
+
+        for (uint32_t i = 0; i < layerNum; ++i) {
+            auto layer = layers[i];
+            if (layer == nullptr) {
+                LOG_E("load model failed of {}th layer is null.", i);
+
+            }
+            auto ret = layer->loadModel(modelBin);
+
+        }
+        return ErrorCode::NN_OK;
     }
 
 

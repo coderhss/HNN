@@ -6,6 +6,7 @@
 #define HNN_LAYER_H
 #include "Blob.h"
 #include "ParamDict.h"
+#include "ModelBin.h"
 
 namespace HNN {
     class Layer {
@@ -16,7 +17,7 @@ namespace HNN {
 
         virtual ErrorCode loadParam(const ParamDict& paramDict);
 
-//        virtual ErrorCode loadModel(const );
+        virtual ErrorCode loadModel(ModelBinPtr modelBin);
 
         std::string type;
 

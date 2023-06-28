@@ -7,4 +7,8 @@ namespace HNN {
     ErrorCode Layer::loadParam(const ParamDict& paramDict) {
         return ErrorCode::NN_OK;
     }
+
+    ErrorCode Layer::loadModel(ModelBinPtr modelBin) {
+        return ErrorCode::NN_FAILED;
+    }
 }

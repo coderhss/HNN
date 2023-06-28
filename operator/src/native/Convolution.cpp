@@ -11,4 +11,8 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
+    ErrorCode Convolution::loadModel(ModelBinPtr modelBin) {
+        return ErrorCode::NN_OK;
+    }
+
 }
