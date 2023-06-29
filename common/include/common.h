@@ -12,6 +12,8 @@
 #include "core/CommonFactory.h"
 
 #define ALIGNMENT_32 32
+typedef unsigned short float16_t;
+
 void *alignedMalloc(unsigned long size, int alignment);
 
 void alignedFree(void *aligned);

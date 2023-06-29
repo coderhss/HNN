@@ -194,7 +194,7 @@ namespace HNN {
             auto layer = layers[i];
             if (layer == nullptr) {
                 LOG_E("load model failed of {}th layer is null.", i);
-
+                break;
             }
             auto ret = layer->loadModel(modelBin);
 

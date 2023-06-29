@@ -15,6 +15,10 @@ namespace HNN {
 
         virtual ErrorCode scan(const std::string& format, void* data) const = 0;
 
+        virtual ErrorCode read(void* buffer, uint32_t size) const = 0;
+
+        virtual ErrorCode reference(uint32_t size, const void** buffer) const = 0;
+
     };
 
     class DataReaderFromStdio : public DataReader {
@@ -23,6 +27,10 @@ namespace HNN {
         virtual ~DataReaderFromStdio() = default;
 
         ErrorCode scan(const std::string& format, void* data) const override;
+
+        ErrorCode read(void* buffer, uint32_t size) const override;
+
+        ErrorCode reference(uint32_t size, const void** buffer) const override;
 
     private:
         FilePtr filePtr;

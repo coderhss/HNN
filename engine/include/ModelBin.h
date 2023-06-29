@@ -12,6 +12,11 @@ namespace HNN {
         ModelBin() = default;
 
         virtual ~ModelBin() = default;
+        // 0 auto
+        // 1 float32
+        // 2 float16
+        // 3 uint8
+
         virtual TensorPtr load(uint32_t width, int type) const = 0;
 
     };
@@ -28,5 +33,14 @@ namespace HNN {
         DataReaderPtr dataReaderPtr;
     };
 
+    typedef union {
+        struct {
+            unsigned char f0;
+            unsigned char f1;
+            unsigned char f2;
+            unsigned char f3;
+        };
+        uint32_t tag;
+    } FlagStruct;
 }
 #endif //HNN_MODELBIN_H
