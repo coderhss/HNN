@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include "DataManagerBase.h"
+#include "core/DataType.h"
 namespace HNN {
     using ShapeVector = std::vector< uint32_t >;
 
@@ -21,6 +22,14 @@ namespace HNN {
 
         TensorBase(const ShapeVector& shape){};
 
+        TensorBase(const ShapeVector &shape,
+                   const MemoryType &memType = MemoryType::MEM_ON_CPU,
+                   const DataType &dataType = DataType::HNN_FLOAT32);
+
+        virtual void setProperty(ShapeVector& shape, uint32_t& stride, uint32_t& nscalar, uint32_t& size) = 0;
+
+        inline void setInited(const bool inited) { tensorInited = inited; };
+
         template< typename T > inline T* getData(const uint32_t size = 0) const {
             if (mShape.empty() || mDataManagerPtr == nullptr) {
                 return nullptr;
@@ -31,11 +40,14 @@ namespace HNN {
 
     protected:
         ErrorCode init();
+        ErrorCode CreateDataManager();
 
+        std::string mMemoryType = "";
     private:
         std::string mName;
         ShapeVector mShape;
         uint32_t mSize;
+        bool tensorInited = false;
 
         DataManagerBasePtr mDataManagerPtr;
 

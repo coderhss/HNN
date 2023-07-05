@@ -5,6 +5,7 @@
 #ifndef HNN_TENSOR_H
 #define HNN_TENSOR_H
 #include "TensorBase.h"
+#include "core/DataType.h"
 namespace HNN {
     #define NCHW ("NCHW")
     #define NHWC ("NHWC")
@@ -15,6 +16,16 @@ namespace HNN {
         virtual ~Tensor(){};
 
         Tensor(const ShapeVector &shape, DataManagerBasePtr dataManagerBasePtr);
+
+        Tensor(const ShapeVector &shape,
+               const std::string &shapeMode = NCHW,
+               const MemoryType &memType = MemoryType::MEM_ON_CPU,
+               const DataType &dataType = DataType::HNN_FLOAT32)
+               : TensorBase(shape, memType, dataType) {
+            this->setInited(init() == ErrorCode::NN_OK);
+        }
+
+        void setProperty(ShapeVector& shape, uint32_t& stride, uint32_t& nscalar, uint32_t& size) override;
 
         inline std::string getMemoryFormat() const {
             return mMemoryFormat;

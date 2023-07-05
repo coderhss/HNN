@@ -10,9 +10,8 @@ namespace HNN {
             LOG_E("fast malloc ptr is null.");
         }
         mSize = size;
-        mData.reset((uint8_t*)newPointer, [&](uint8_t* p){
+        mData.reset((uint8_t*)newPointer, [&](uint8_t* p) {
             alignedFree(p);
-//            delete p;
             mSize = 0;
         });
         return newPointer;

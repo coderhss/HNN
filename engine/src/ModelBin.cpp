@@ -8,6 +8,7 @@ namespace HNN {
 #define FLOAT32 0x0002C056
 
     TensorPtr ModelBinFromDataReader::load(uint32_t width, int type) const {
+        TensorPtr tensor = std::make_shared< Tensor >();
         switch (type) {
             case 0:
             {
@@ -18,13 +19,21 @@ namespace HNN {
                     return nullptr;
                 }
                 uint32_t flag = flagStruct.f0 + flagStruct.f1 + flagStruct.f2 + flagStruct.f3;
-
+                ErrorCode readStatus = ErrorCode::NN_OK;
                 if (flagStruct.tag == FLOAT16) {
 
                 } else if (flagStruct.tag == UINT8) {
 
                 } else if (flagStruct.tag == FLOAT32) {
+                    const void* referenceBuffer = 0;
+                    readStatus = dataReaderPtr->reference(width * sizeof(float), &referenceBuffer);
+                    if (readStatus != ErrorCode::NN_OK) {
+                        LOG_E("read model bin failed.");
 
+                    } else {
+                        void* root;
+                        dataReaderPtr->read(root, width * sizeof(float));
+                    }
                 }
 
                 break;

@@ -11,4 +11,10 @@ namespace HNN {
             return;
         }
     }
+
+    void Tensor::setProperty(ShapeVector &shape, uint32_t &stride, uint32_t &nscalar, uint32_t &size) {
+
+    }
+
+
 }
