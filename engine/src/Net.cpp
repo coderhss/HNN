@@ -46,8 +46,8 @@ namespace HNN {
         // parse header
         int magic = 0;
         SCAN_VALUE("%d", magic);
-        if (magic != 1314) {
-            LOG_E("param is too old");
+        if (magic != 7767517) {
+            LOG_E("param is too old, magic: {}", magic);
             return ErrorCode::NN_FAILED;
         }
 
@@ -62,7 +62,7 @@ namespace HNN {
         }
 
         this->blobs.resize(blobNumber);
-        this->layers.resize(layoutNumber);
+        this->layers;
         uint32_t currentBlobIndex = 0;
         for (uint32_t i = 0; i < layoutNumber; ++i) {
             char layerType[256], layerName[256];
@@ -125,6 +125,7 @@ namespace HNN {
             paramDict.loadParam(dataReader);
 
             layer->loadParam(paramDict);
+            this->layers.push_back(layer);
         }
 
         return ErrorCode::NN_OK;

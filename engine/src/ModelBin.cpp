@@ -8,7 +8,8 @@ namespace HNN {
 #define FLOAT32 0x0002C056
 
     TensorPtr ModelBinFromDataReader::load(uint32_t width, int type) const {
-        TensorPtr tensor = std::make_shared< Tensor >();
+        ShapeVector shape{1, 1, 1, width};
+        TensorPtr tensor = std::make_shared< Tensor >(shape);
         switch (type) {
             case 0:
             {
@@ -31,8 +32,9 @@ namespace HNN {
                         LOG_E("read model bin failed.");
 
                     } else {
-                        void* root;
+                        void* root = tensor->getData< void >();
                         dataReaderPtr->read(root, width * sizeof(float));
+
                     }
                 }
 
