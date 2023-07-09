@@ -7,7 +7,7 @@ namespace HNN {
         return Layer::loadParam(paramDict);
     }
 
-    ErrorCode Softmax::loadModel(HNN::ModelBinPtr modelBin) {
+    ErrorCode Softmax::loadModel(ModelBinPtr modelBin) {
         return Layer::loadModel(modelBin);
     }
 }

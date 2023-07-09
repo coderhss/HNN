@@ -42,7 +42,7 @@ namespace HNN {
         ErrorCode init();
         ErrorCode CreateDataManager();
 
-        std::string mMemoryType = "";
+        std::string mMemoryType = "DataManagerCommon";
     private:
         std::string mName;
         ShapeVector mShape;

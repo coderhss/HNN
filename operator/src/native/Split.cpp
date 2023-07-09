@@ -7,7 +7,7 @@ namespace HNN {
         return Layer::loadParam(paramDict);
     }
 
-    ErrorCode Split::loadModel(HNN::ModelBinPtr modelBin) {
+    ErrorCode Split::loadModel(ModelBinPtr modelBin) {
         return Layer::loadModel(modelBin);
     }
 }

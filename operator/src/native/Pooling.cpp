@@ -7,7 +7,7 @@ namespace HNN {
         return Layer::loadParam(paramDict);
     }
 
-    ErrorCode Pooling::loadModel(HNN::ModelBinPtr modelBin) {
+    ErrorCode Pooling::loadModel(ModelBinPtr modelBin) {
         return Layer::loadModel(modelBin);
     }
 }

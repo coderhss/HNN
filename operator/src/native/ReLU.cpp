@@ -9,7 +9,7 @@ namespace HNN {
         return Layer::loadParam(paramDict);
     }
 
-    ErrorCode ReLU::loadModel(HNN::ModelBinPtr modelBin) {
+    ErrorCode ReLU::loadModel(ModelBinPtr modelBin) {
         return Layer::loadModel(modelBin);
     }
 

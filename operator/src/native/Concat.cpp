@@ -7,7 +7,7 @@ namespace HNN {
         return Layer::loadParam(paramDict);
     }
 
-    ErrorCode Concat::loadModel(HNN::ModelBinPtr modelBin) {
+    ErrorCode Concat::loadModel(ModelBinPtr modelBin) {
         return Layer::loadModel(modelBin);
     }
 }

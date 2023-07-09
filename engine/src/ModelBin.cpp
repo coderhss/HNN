@@ -37,11 +37,16 @@ namespace HNN {
 
                     }
                 }
+                void* root = tensor->getData< void >();
+                dataReaderPtr->read(root, width * sizeof(float));
 
                 break;
             }
-            case 1:
+            case 1: {
+                void *buffer = tensor->getData< void >();
+                dataReaderPtr->read(buffer, width * sizeof(float));
                 break;
+            }
             case 2:
                 break;
             default: ;

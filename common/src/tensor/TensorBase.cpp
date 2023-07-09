@@ -30,7 +30,7 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    TensorBase::TensorBase(const std::vector<uint32_t> &shape, const MemoryType &memType, const DataType &dataType) {
+    TensorBase::TensorBase(const std::vector<uint32_t> &shape, const MemoryType &memType, const DataType &dataType) : mShape(shape) {
 
     }
 }

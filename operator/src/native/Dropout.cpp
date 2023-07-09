@@ -7,7 +7,7 @@ namespace HNN {
         return Layer::loadParam(paramDict);
     }
 
-    ErrorCode Dropout::loadModel(HNN::ModelBinPtr modelBin) {
+    ErrorCode Dropout::loadModel(ModelBinPtr modelBin) {
         return Layer::loadModel(modelBin);
     }
 }
