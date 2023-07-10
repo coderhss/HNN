@@ -26,6 +26,8 @@ namespace HNN {
                    const MemoryType &memType = MemoryType::MEM_ON_CPU,
                    const DataType &dataType = DataType::HNN_FLOAT32);
 
+        ErrorCode reshape(const ShapeVector& shape);
+
         virtual void setProperty(ShapeVector& shape, uint32_t& stride, uint32_t& nscalar, uint32_t& size) = 0;
 
         inline void setInited(const bool inited) { tensorInited = inited; };
@@ -35,7 +37,7 @@ namespace HNN {
                 return nullptr;
             }
             uint8_t* data = static_cast< uint8_t* >(mDataManagerPtr->getData());
-            return static_cast< T* >(data);
+            return (T*)data;
         }
 
     protected:
@@ -46,11 +48,13 @@ namespace HNN {
     private:
         std::string mName;
         ShapeVector mShape;
+        uint32_t number;
         uint32_t mSize;
         bool tensorInited = false;
 
         DataManagerBasePtr mDataManagerPtr;
 
     };
+    using TensorBasePtr = std::shared_ptr< TensorBase >;
 }
 #endif //HNN_TENSORBASE_H

@@ -17,7 +17,9 @@ namespace HNN {
         // 2 float16
         // 3 uint8
 
-        virtual TensorPtr load(uint32_t width, int type) const = 0;
+        virtual TensorBasePtr load(uint32_t width, int type) const = 0;
+
+        virtual TensorBasePtr load(uint32_t n, uint32_t c, uint32_t h, uint32_t w, int type) const = 0;
 
     };
 
@@ -28,7 +30,9 @@ namespace HNN {
         explicit ModelBinFromDataReader(DataReaderPtr dataReader)
             : ModelBin(), dataReaderPtr(dataReader){};
 
-        TensorPtr load(uint32_t width, int type) const override;
+        TensorBasePtr load(uint32_t width, int type) const override;
+
+        TensorBasePtr load(uint32_t n, uint32_t c, uint32_t h, uint32_t w, int type) const override;
 
         DataReaderPtr dataReaderPtr;
     };

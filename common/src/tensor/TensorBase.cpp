@@ -33,4 +33,21 @@ namespace HNN {
     TensorBase::TensorBase(const std::vector<uint32_t> &shape, const MemoryType &memType, const DataType &dataType) : mShape(shape) {
 
     }
+
+    ErrorCode TensorBase::reshape(const ShapeVector &shape) {
+        if (shape.empty()) {
+            LOG_W("reshape size is empty.");
+            return ErrorCode::NN_FAILED;
+        }
+        uint32_t size = shape[0];
+        for (uint32_t i = 1; shape.size(); ++i) {
+            size *= shape[i];
+        }
+        if (size != this->number) {
+            LOG_E("reshape number {} is unequal to old number {}", size, this->number);
+            return ErrorCode::NN_FAILED;
+        }
+        this->mShape = shape;
+        return ErrorCode::NN_OK;
+    }
 }

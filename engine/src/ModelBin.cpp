@@ -7,7 +7,7 @@ namespace HNN {
 #define UINT8 0x000D4B38
 #define FLOAT32 0x0002C056
 
-    TensorPtr ModelBinFromDataReader::load(uint32_t width, int type) const {
+    TensorBasePtr ModelBinFromDataReader::load(uint32_t width, int type) const {
         ShapeVector shape{1, 1, 1, width};
         TensorPtr tensor = std::make_shared< Tensor >(shape);
         switch (type) {
@@ -53,6 +53,15 @@ namespace HNN {
 
         }
         return nullptr;
+    }
+
+    TensorBasePtr ModelBinFromDataReader::load(uint32_t n, uint32_t c, uint32_t h, uint32_t w, int type) const {
+        uint32_t number = n * c * h * w;
+        auto tensor = load(number, type);
+        ShapeVector shape{n, c, h, w};
+        tensor->reshape(shape);
+
+        return tensor;
     }
 
 }
