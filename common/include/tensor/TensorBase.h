@@ -43,13 +43,14 @@ namespace HNN {
     protected:
         ErrorCode init();
         ErrorCode CreateDataManager();
+        ErrorCode calculateNumber();
 
         MemoryType mMemoryType = MemoryType ::MEM_ON_CPU;
     private:
-        std::string mName;
+        std::string mName = "";
         ShapeVector mShape;
-        uint32_t number;
-        uint32_t mSize;
+        uint32_t number{0};
+        uint32_t mSize{0};
         bool tensorInited = false;
         DataType dataType = DataType::HNN_FLOAT32;
         DataManagerBasePtr mDataManagerPtr;

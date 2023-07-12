@@ -19,6 +19,8 @@ namespace HNN {
             return ret;
         }
         setInited(true);
+        calculateNumber();
+        mSize = number * GetTypeSize(dataType);
         mDataManagerPtr->malloc(mSize);
         return ErrorCode::NN_OK;
     }
@@ -41,7 +43,7 @@ namespace HNN {
             return ErrorCode::NN_FAILED;
         }
         uint32_t size = shape[0];
-        for (uint32_t i = 1; shape.size(); ++i) {
+        for (uint32_t i = 1; i < shape.size(); ++i) {
             size *= shape[i];
         }
         if (size != this->number) {
@@ -49,6 +51,20 @@ namespace HNN {
             return ErrorCode::NN_FAILED;
         }
         this->mShape = shape;
+        return ErrorCode::NN_OK;
+    }
+
+    ErrorCode TensorBase::calculateNumber() {
+        if (tensorInited) {
+            if (mShape.empty()) {
+                number = 0;
+            } else {
+                number = mShape[0];
+                for (uint32_t i = 0; i < mShape.size(); ++i) {
+                    number *= mShape[i];
+                }
+            }
+        }
         return ErrorCode::NN_OK;
     }
 }

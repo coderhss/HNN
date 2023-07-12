@@ -33,14 +33,15 @@ namespace HNN {
                         LOG_E("read model bin failed.");
 
                     } else {
-                        void* root = tensor->getData< void >();
+                        tensor = std::make_shared<Tensor>(shape, NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
+                        void *root = tensor->getData<void>();
                         dataReaderPtr->read(root, width * sizeof(float));
-
                     }
+                } else {
+                    tensor = std::make_shared<Tensor>(shape, NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
+                    void *root = tensor->getData<void>();
+                    dataReaderPtr->read(root, width * sizeof(float));
                 }
-                tensor = std::make_shared< Tensor >(shape, NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
-                void* root = tensor->getData< void >();
-                dataReaderPtr->read(root, width * sizeof(float));
                 break;
             }
             case 1: {
@@ -54,7 +55,7 @@ namespace HNN {
             default: ;
 
         }
-        return nullptr;
+        return tensor;
     }
 
     TensorBasePtr ModelBinFromDataReader::load(uint32_t n, uint32_t c, uint32_t h, uint32_t w, int type) const {
@@ -62,7 +63,6 @@ namespace HNN {
         auto tensor = load(number, type);
         ShapeVector shape{n, c, h, w};
         tensor->reshape(shape);
-
         return tensor;
     }
 

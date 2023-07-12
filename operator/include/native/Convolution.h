@@ -18,13 +18,17 @@ namespace HNN {
         uint32_t kernelWidth{0};
         uint32_t kernelHeight{0};
         uint32_t outputNum{0};
+        uint32_t inputNum{0};
         uint32_t padLeft{0};
         uint32_t padRight{0};
         uint32_t padTop{0};
         uint32_t padBottom{0};
         uint32_t kernelDataSize{0};
         uint32_t biasTerm{0};
-        std::unique_ptr< Tensor > kernel;
+        uint32_t widthStride{0};
+        uint32_t heightStride{0};
+        TensorBasePtr kernel;
+        TensorBasePtr bias;
     };
 }
 
