@@ -2,6 +2,7 @@
 // Created by bryab on 23-6-13.
 //
 #include "ModelBin.h"
+#include <iostream>
 namespace HNN {
 #define FLOAT16 0x01306B47
 #define UINT8 0x000D4B38
@@ -9,7 +10,7 @@ namespace HNN {
 
     TensorBasePtr ModelBinFromDataReader::load(uint32_t width, int type) const {
         ShapeVector shape{1, 1, 1, width};
-        TensorPtr tensor = std::make_shared< Tensor >(shape);
+        TensorPtr tensor;
         switch (type) {
             case 0:
             {
@@ -37,12 +38,13 @@ namespace HNN {
 
                     }
                 }
+                tensor = std::make_shared< Tensor >(shape, NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
                 void* root = tensor->getData< void >();
                 dataReaderPtr->read(root, width * sizeof(float));
-
                 break;
             }
             case 1: {
+                tensor = std::make_shared< Tensor >(shape, NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
                 void *buffer = tensor->getData< void >();
                 dataReaderPtr->read(buffer, width * sizeof(float));
                 break;

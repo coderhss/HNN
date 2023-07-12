@@ -7,6 +7,10 @@ namespace HNN {
     TensorBase::TensorBase(const ShapeVector &shape, DataManagerBasePtr dataManagerBasePtr)  :
             mShape(shape), mDataManagerPtr(dataManagerBasePtr) {}
 
+    TensorBase::TensorBase(const ShapeVector &shape, const MemoryType &memType, const DataType &dataType) :
+            mShape(shape), mMemoryType(memType), dataType(dataType) {
+    }
+
     ErrorCode TensorBase::init() {
         auto memoryAllocated = !(mDataManagerPtr == nullptr);
         auto ret = ErrorCode::NN_OK;
@@ -21,17 +25,14 @@ namespace HNN {
 
     ErrorCode TensorBase::CreateDataManager() {
         if (mDataManagerPtr == nullptr) {
-            mDataManagerPtr = CommonFactory< DataManagerBase >::getInstance().Create(mMemoryType);
+            auto memoryTypeStr = DataManagerType2Name.at(mMemoryType);
+            mDataManagerPtr = CommonFactory< DataManagerBase >::getInstance().Create(memoryTypeStr);
             if (mDataManagerPtr == nullptr) {
-                LOG_E("data manager of {} create failed!", mMemoryType);
+                LOG_E("data manager of {} create failed!", memoryTypeStr);
                 return ErrorCode::NN_FAILED;
             }
         }
         return ErrorCode::NN_OK;
-    }
-
-    TensorBase::TensorBase(const std::vector<uint32_t> &shape, const MemoryType &memType, const DataType &dataType) : mShape(shape) {
-
     }
 
     ErrorCode TensorBase::reshape(const ShapeVector &shape) {

@@ -44,14 +44,14 @@ namespace HNN {
         ErrorCode init();
         ErrorCode CreateDataManager();
 
-        std::string mMemoryType = "DataManagerCommon";
+        MemoryType mMemoryType = MemoryType ::MEM_ON_CPU;
     private:
         std::string mName;
         ShapeVector mShape;
         uint32_t number;
         uint32_t mSize;
         bool tensorInited = false;
-
+        DataType dataType = DataType::HNN_FLOAT32;
         DataManagerBasePtr mDataManagerPtr;
 
     };

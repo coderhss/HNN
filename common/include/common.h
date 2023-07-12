@@ -24,4 +24,10 @@ typedef enum MemoryType {
     MEM_ON_CUDA_HOST
 } MemoryType;
 
+static std::unordered_map< MemoryType, std::string > DataManagerType2Name {
+        {MemoryType::MEM_ON_CPU, "DataManagerCommon"},
+        {MemoryType::MEM_ON_CUDA_DEV, "DataManagerCudaDev"},
+        {MemoryType::MEM_ON_CUDA_HOST, "DataManagerCudaHost"}
+};
+
 #endif //HNN_COMMON_H
