@@ -11,4 +11,8 @@ namespace HNN {
     ErrorCode Layer::loadModel(ModelBinPtr modelBin) {
         return ErrorCode::NN_FAILED;
     }
+
+    ErrorCode Layer::inference(TensorPtr input, TensorPtr output) {
+        return ErrorCode::NN_FAILED;
+    }
 }

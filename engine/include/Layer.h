@@ -19,6 +19,8 @@ namespace HNN {
 
         virtual ErrorCode loadModel(ModelBinPtr modelBin);
 
+        virtual ErrorCode inference(TensorPtr input, TensorPtr output);
+
         std::string type;
 
         std::string name;

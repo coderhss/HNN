@@ -4,10 +4,14 @@
 #include "Split.h"
 namespace HNN {
     ErrorCode Split::loadParam(const ParamDict &paramDict) {
-        return Layer::loadParam(paramDict);
+        return ErrorCode::NN_OK;
     }
 
     ErrorCode Split::loadModel(ModelBinPtr modelBin) {
-        return Layer::loadModel(modelBin);
+        return ErrorCode::NN_OK;
+    }
+
+    ErrorCode Split::inference(TensorPtr input, TensorPtr output) {
+        return Layer::inference(input, output);
     }
 }

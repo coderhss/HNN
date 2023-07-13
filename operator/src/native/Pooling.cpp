@@ -4,10 +4,14 @@
 #include "Pooling.h"
 namespace HNN {
     ErrorCode Pooling::loadParam(const ParamDict &paramDict) {
-        return Layer::loadParam(paramDict);
+        return ErrorCode::NN_OK;
     }
 
     ErrorCode Pooling::loadModel(ModelBinPtr modelBin) {
-        return Layer::loadModel(modelBin);
+        return ErrorCode::NN_OK;
+    }
+
+    ErrorCode Pooling::inference(TensorPtr input, TensorPtr output) {
+        return Layer::inference(input, output);
     }
 }

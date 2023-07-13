@@ -12,6 +12,10 @@ namespace HNN {
         ErrorCode loadParam(const ParamDict& paramDict) override;
 
         ErrorCode loadModel(ModelBinPtr modelBin) override;
+
+        ErrorCode inference(TensorPtr input, TensorPtr output) override;
+
+        float scale{0.0};
     };
 }
 

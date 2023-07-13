@@ -14,6 +14,6 @@ namespace HNN {
     }
 
     ErrorCode Input::loadModel(ModelBinPtr modelBin) {
-        return Layer::loadModel(modelBin);
+        return ErrorCode::NN_OK;
     }
 }

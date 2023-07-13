@@ -6,11 +6,18 @@
 namespace HNN {
 
     ErrorCode ReLU::loadParam(const ParamDict &paramDict) {
-        return Layer::loadParam(paramDict);
+
+        slope = paramDict.get(0, 0.0f);
+
+        return ErrorCode::NN_OK;
     }
 
     ErrorCode ReLU::loadModel(ModelBinPtr modelBin) {
-        return Layer::loadModel(modelBin);
+        return ErrorCode::NN_OK;
+    }
+
+    ErrorCode ReLU::inference(TensorPtr input, TensorPtr output) {
+        return Layer::inference(input, output);
     }
 
 }

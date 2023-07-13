@@ -15,6 +15,8 @@ namespace HNN {
 
         ErrorCode loadModel(ModelBinPtr modelBin) override;
 
+        ErrorCode inference(TensorPtr input, TensorPtr output) override;
+
         uint32_t kernelWidth{0};
         uint32_t kernelHeight{0};
         uint32_t outputNum{0};

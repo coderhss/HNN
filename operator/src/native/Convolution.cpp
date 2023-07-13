@@ -27,4 +27,8 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
+    ErrorCode Convolution::inference(TensorPtr input, TensorPtr output) {
+        return Layer::inference(input, output);
+    }
+
 }
