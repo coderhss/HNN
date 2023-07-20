@@ -6,6 +6,7 @@
 #define HNN_TEST_OP_H
 #include "gtest/gtest.h"
 #include "common.h"
+#include "register.h"
 #include "Layer.h"
 
 #endif //HNN_TEST_OP_H

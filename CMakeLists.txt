@@ -16,6 +16,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/operator/include/native)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/operator/include)
 #set( CMAKE_VERBOSE_MAKEFILE on )
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 add_executable(HNN main.cpp)
 target_link_libraries(HNN PUBLIC common engine operator)
 

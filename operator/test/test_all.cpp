@@ -7,6 +7,5 @@
 int main(int argc, char* argv[]) {
     testing::InitGoogleTest(&argc, argv);
     auto ret = RUN_ALL_TESTS();
-    std::cout << "hello world" << std::endl;
     return 0;
 }
