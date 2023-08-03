@@ -13,6 +13,14 @@ protected:
     }
 
     ErrorCode testConvolution(uint32_t width, uint32_t height, uint32_t outNum) {
+        cv::Mat kernel(3, 3, CV_32F);
+        cv::RNG rng;
+        rng.fill(kernel, cv::RNG::UNIFORM, 1, 5);
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                std::cout << kernel.at<float>(i, j) << std::endl;
+            }
+        }
         return ErrorCode::NN_FAILED;
     }
 

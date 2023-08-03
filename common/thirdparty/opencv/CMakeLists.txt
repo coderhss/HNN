@@ -1,0 +1,5 @@
+set(target opencv_entry)
+add_library(${target} opencv_entry.cpp)
+set(OPENCV_PATH ${CMAKE_CURRENT_SOURCE_DIR}/linux-x86/lib)
+file(GLOB OPENCV_LIBS ${OPENCV_PATH}/*.so)
+target_link_libraries(${target} ${OPENCV_LIBS})
