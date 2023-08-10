@@ -13,9 +13,10 @@ protected:
     }
 
     ErrorCode testConvolution(uint32_t width, uint32_t height, uint32_t outNum) {
-        cv::Mat kernel(3, 3, CV_32F);
-        cv::Mat image(320, 320, CV_32F);
+        cv::Mat kernel(3, 3, CV_32FC3);
+        cv::Mat image(320, 320, CV_32FC3);
         cv::Mat out;
+
         cv::RNG rng;
         rng.fill(kernel, cv::RNG::UNIFORM, 1, 5);
         rng.fill(image, cv::RNG::UNIFORM, 1, 5);
@@ -31,6 +32,8 @@ protected:
                 std::cout << kernel.at<float>(i, j) << std::endl;
             }
         }
+
+
         return ErrorCode::NN_FAILED;
     }
 

@@ -8,27 +8,33 @@
 namespace HNN {
 
     ErrorCode Convolution::loadParam(const ParamDict& paramDict) {
-        kernelDataSize = paramDict.get(6, 0);
-        biasTerm = paramDict.get(5, 0);
-        outputNum = paramDict.get(0, 1);
-        kernelWidth = paramDict.get(1, 1);
-        kernelHeight = paramDict.get(12, (int)kernelWidth);
-        widthStride = paramDict.get(3, 1);
-        heightStride = paramDict.get(13, (int)(widthStride));
-        inputNum = kernelDataSize / kernelHeight / kernelWidth / outputNum;
+
+        param->kernelDataSize = paramDict.get(6, 0);
+        param->biasTerm = paramDict.get(5, 0);
+        param->outputNum = paramDict.get(0, 1);
+        param->kernelWidth = paramDict.get(1, 1);
+        param->kernelHeight = paramDict.get(12, (int)param->kernelWidth);
+        param->widthStride = paramDict.get(3, 1);
+        param->heightStride = paramDict.get(13, (int)(param->widthStride));
+        param->inputNum = param->kernelDataSize / param->kernelHeight / param->kernelWidth / param->outputNum;
         return ErrorCode::NN_OK;
     }
 
     ErrorCode Convolution::loadModel(ModelBinPtr modelBin) {
-        kernel = modelBin->load(inputNum, outputNum, kernelHeight, kernelWidth, 0);
-        if (biasTerm) {
-            bias = modelBin->load(outputNum, 1);
+        param->kernel = modelBin->load(param->inputNum, param->outputNum, param->kernelHeight, param->kernelWidth, 0);
+        if (param->biasTerm) {
+            param->bias = modelBin->load(param->outputNum, 1);
         }
         return ErrorCode::NN_OK;
     }
 
     ErrorCode Convolution::inference(TensorPtr input, TensorPtr output) {
+        runImpl(input, output, param);
         return Layer::inference(input, output);
+    }
+
+    ErrorCode Convolution::runImpl(HNN::TensorPtr input, HNN::TensorPtr output, std::shared_ptr<OpParam> param) {
+        return ErrorCode::NN_OK;
     }
 
 }
