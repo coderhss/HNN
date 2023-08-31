@@ -62,7 +62,7 @@ namespace HNN {
         uint32_t number = n * c * h * w;
         auto tensor = load(number, type);
         ShapeVector shape{n, c, h, w};
-        tensor->reshape(shape);
+//        tensor->reshape(shape);
         return tensor;
     }
 
