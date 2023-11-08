@@ -11,7 +11,7 @@ namespace HNN {
     public:
         ModelBin() = default;
 
-        virtual ~ModelBin() = default;
+        virtual ~ModelBin(){};
         // 0 auto
         // 1 float32
         // 2 float16

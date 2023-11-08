@@ -1,9 +1,9 @@
 //
 // Created by bryab on 23-4-16.
 //
-#include "common.h"
+#include "common.hpp"
 #include <mutex>
-
+namespace HNN {
 static std::mutex mtx;
 void *alignedMalloc(unsigned long size, int alignment) {
     const int pointerSize = sizeof(void *);
@@ -35,4 +35,5 @@ void alignedFree(void *aligned) {
         LOG_W("aligned mem free raw pointer is null.");
     }
     aligned = nullptr;
+}
 }

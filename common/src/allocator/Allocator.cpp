@@ -2,7 +2,7 @@
 // Created by bryab on 23-4-16.
 //
 #include "Allocator.h"
-#include "common.h"
+#include "common.hpp"
 
 namespace HNN {
 

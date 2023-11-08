@@ -4,7 +4,7 @@
 
 #ifndef HNN_NATIVEREGISTOR_H
 #define HNN_NATIVEREGISTOR_H
-#include "common.h"
+#include "common.hpp"
 #include "Convolution.h"
 #include "Input.h"
 #include "Layer.h"

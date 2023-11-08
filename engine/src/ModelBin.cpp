@@ -33,19 +33,19 @@ namespace HNN {
                         LOG_E("read model bin failed.");
 
                     } else {
-                        tensor = std::make_shared<Tensor>(shape, NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
+                        tensor = std::make_shared<Tensor>(shape, MemFormat::NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
                         void *root = tensor->getData<void>();
                         dataReaderPtr->read(root, width * sizeof(float));
                     }
                 } else {
-                    tensor = std::make_shared<Tensor>(shape, NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
+                    tensor = std::make_shared<Tensor>(shape, MemFormat::NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
                     void *root = tensor->getData<void>();
                     dataReaderPtr->read(root, width * sizeof(float));
                 }
                 break;
             }
             case 1: {
-                tensor = std::make_shared< Tensor >(shape, NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
+                tensor = std::make_shared< Tensor >(shape, MemFormat::NCHW, MemoryType::MEM_ON_CPU, DataType::HNN_FLOAT32);
                 void *buffer = tensor->getData< void >();
                 dataReaderPtr->read(buffer, width * sizeof(float));
                 break;

@@ -164,7 +164,7 @@ public:
     }
 
     // Can't modify the tensor from this interface
-    const Tensor* getTensor() const;
+    const Tensor* vgrf() const;
 private:
     Variable(EXPRP expr, int index) {
         mFrom      = expr;

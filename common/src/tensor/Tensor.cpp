@@ -2,7 +2,6 @@
 // Created by bryab on 23-4-15.
 //
 #include "Tensor.h"
-#include "TensorBase.h"
 
 namespace HNN {
     Tensor::Tensor(const ShapeVector& shape, DataManagerBasePtr dataManagerBasePtr) : TensorBase(shape, dataManagerBasePtr) {

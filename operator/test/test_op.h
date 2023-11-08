@@ -5,9 +5,9 @@
 #ifndef HNN_TEST_OP_H
 #define HNN_TEST_OP_H
 #include "gtest/gtest.h"
-#include "common.h"
+#include "common.hpp"
 #include "register.h"
 #include "Layer.h"
-#include "opencv2/opencv.hpp"
+// #include "opencv2/opencv.hpp"
 
 #endif //HNN_TEST_OP_H

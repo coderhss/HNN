@@ -4,7 +4,7 @@
 
 #ifndef HNN_DATAREADER_H
 #define HNN_DATAREADER_H
-#include "common.h"
+#include "common.hpp"
 namespace HNN {
     using FilePtr = std::shared_ptr< FILE >;
     class DataReader {

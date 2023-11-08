@@ -8,6 +8,7 @@
 #include "gtest/gtest.h"
 #include "Net.h"
 #include "register.h"
+#include "common.hpp"
 
 class Test : public testing::TestWithParam<int> {
 

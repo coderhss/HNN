@@ -11,6 +11,13 @@ namespace HNN {
             mShape(shape), mMemoryType(memType), dataType(dataType) {
     }
 
+    TensorBase::TensorBase(const void* virt_ptr,
+               const void* phy_ptr,
+               const ShapeVector &shape,
+               const MemoryType &memType,
+               const DataType &dataType) : 
+               mShape(shape), mMemoryType(memType), dataType(dataType), mPtrVec({virt_ptr, phy_ptr}) {};
+
     ErrorCode TensorBase::init() {
         auto memoryAllocated = !(mDataManagerPtr == nullptr);
         auto ret = ErrorCode::NN_OK;
@@ -21,7 +28,16 @@ namespace HNN {
         setInited(true);
         calculateNumber();
         mSize = number * GetTypeSize(dataType);
-        mDataManagerPtr->malloc(mSize);
+        if (memoryAllocated) {
+            return ErrorCode::NN_OK;
+        }
+        if (mPtrVec.size() == 2) {
+            mDataManagerPtr->setPtr(
+                const_cast< void* >(mPtrVec[0]), const_cast< void* >(mPtrVec[1]), mSize
+            );
+        } else {
+            mDataManagerPtr->malloc(mSize);
+        }
         return ErrorCode::NN_OK;
     }
 

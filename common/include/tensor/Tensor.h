@@ -7,8 +7,10 @@
 #include "TensorBase.h"
 #include "core/DataType.h"
 namespace HNN {
-    #define NCHW ("NCHW")
-    #define NHWC ("NHWC")
+    enum class MemFormat {
+        NCHW,
+        NHWC
+    };
     class Tensor : public TensorBase {
     public:
         Tensor() = default;
@@ -18,7 +20,7 @@ namespace HNN {
         Tensor(const ShapeVector &shape, DataManagerBasePtr dataManagerBasePtr);
 
         Tensor(const ShapeVector &shape,
-               const std::string &shapeMode = NCHW,
+               const MemFormat &shapeMode = MemFormat::NCHW,
                const MemoryType &memType = MemoryType::MEM_ON_CPU,
                const DataType &dataType = DataType::HNN_FLOAT32)
                : TensorBase(shape, memType, dataType) {
@@ -27,11 +29,11 @@ namespace HNN {
 
         void setProperty(ShapeVector& shape, uint32_t& stride, uint32_t& nscalar, uint32_t& size) override;
 
-        inline std::string getMemoryFormat() const {
+        inline const MemFormat getMemoryFormat() const {
             return mMemoryFormat;
         }
     private:
-        std::string mMemoryFormat = NCHW;
+        MemFormat mMemoryFormat = MemFormat::NCHW;
     };
     using TensorPtr = std::shared_ptr< Tensor >;
 }

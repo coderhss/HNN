@@ -4,7 +4,7 @@
 
 #ifndef HNN_DATAMANAGERBASE_H
 #define HNN_DATAMANAGERBASE_H
-#include "common.h"
+#include "common.hpp"
 
 namespace HNN {
 
@@ -14,6 +14,7 @@ namespace HNN {
         virtual void* malloc(const uint32_t size) = 0;
         virtual void free(void* p) = 0;
         virtual void* getData() { return (void*)mData.get(); };
+        virtual void* setPtr(void* virt, void* phy, uint32_t size) = 0;
 
     protected:
         std::shared_ptr< uint8_t > mData = std::make_shared< uint8_t >();

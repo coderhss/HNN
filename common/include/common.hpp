@@ -14,6 +14,8 @@
 #define ALIGNMENT_32 32
 typedef unsigned short float16_t;
 
+namespace HNN {
+    
 void *alignedMalloc(unsigned long size, int alignment);
 
 void alignedFree(void *aligned);
@@ -30,4 +32,5 @@ static std::unordered_map< MemoryType, std::string > DataManagerType2Name {
         {MemoryType::MEM_ON_CUDA_HOST, "DataManagerCudaHost"}
 };
 
+}
 #endif //HNN_COMMON_H

@@ -12,7 +12,7 @@ namespace HNN {
     public:
         void *malloc(const uint32_t size) override;
         void free(void* p) override;
-
+        void* setPtr(void* virt, void* phy, uint32_t size) override;
     private:
         std::mutex mtx;
     };

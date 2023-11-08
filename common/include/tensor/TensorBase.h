@@ -10,7 +10,7 @@
 #include "DataManagerBase.h"
 #include "core/DataType.h"
 namespace HNN {
-    using ShapeVector = std::vector< uint32_t >;
+    using ShapeVector = std::vector< int32_t >;
 
     class TensorBase {
     public:
@@ -26,7 +26,19 @@ namespace HNN {
                    const MemoryType &memType = MemoryType::MEM_ON_CPU,
                    const DataType &dataType = DataType::HNN_FLOAT32);
 
+        TensorBase(const void* virt_ptr,
+                   const void* phy_ptr,
+                   const ShapeVector &shape,
+                   const MemoryType &memType = MemoryType::MEM_ON_CPU,
+                   const DataType &dataType = DataType::HNN_FLOAT32);
+
         ErrorCode reshape(const ShapeVector& shape);
+
+        inline const ShapeVector& getShape() { return mShape; }
+
+        inline const DataType& getDataType() { return dataType; }
+
+        inline const uint32_t getTypeSize() { return GetTypeSize(dataType); }
 
         virtual void setProperty(ShapeVector& shape, uint32_t& stride, uint32_t& nscalar, uint32_t& size) = 0;
 
@@ -54,6 +66,7 @@ namespace HNN {
         bool tensorInited = false;
         DataType dataType = DataType::HNN_FLOAT32;
         DataManagerBasePtr mDataManagerPtr;
+        std::vector< const void* > mPtrVec;
 
     };
     using TensorBasePtr = std::shared_ptr< TensorBase >;

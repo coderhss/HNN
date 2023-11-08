@@ -25,4 +25,15 @@ namespace HNN {
         alignedFree(pointer);
         pointer = nullptr;
     }
+
+    void* DataManagerCommon::setPtr(void* virt, void* phy_ptr, uint32_t size) {
+        if (virt == nullptr || size == 0) {
+            LOG_E("set ptr err {}", size);
+            return nullptr;
+        }
+        // 外部传入的指针不要在内部释放
+        mData.reset(static_cast< uint8_t* >(virt), [](uint8_t* p) {});
+        mSize = size;
+        return mData.get();
+    }
 }

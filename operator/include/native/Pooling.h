@@ -14,6 +14,28 @@ namespace HNN {
         ErrorCode loadModel(ModelBinPtr modelBin) override;
 
         ErrorCode inference(TensorPtr input, TensorPtr output) override;
+
+        ErrorCode runImpl(TensorPtr input, TensorPtr output, ParamPtr param);
+
+        struct PoolParam : public OpParam {
+            int pooling_type{0};    // 0
+            int kernel_w{0};    //1    
+            int stride_w{1};    //2
+            int pad_left{0};    //3
+            int global_pooling{0};  //4
+            int pad_mode{0};    //5
+            int avgpool_count_include_pad{0};   //6
+            int adaptive_pooling{0};    //7
+            int out_w{0};   //8
+            int kernel_h{kernel_w}; //11
+            int stride_h{stride_w}; //12
+            int pad_top{pad_left};  //13
+            int pad_right{pad_left};  //14          
+            int pad_bottom{pad_top};  //15
+            int out_h{out_w};         //18
+
+        };
+        std::shared_ptr< PoolParam > pool_param = std::make_shared< PoolParam >();
     };
 }
 

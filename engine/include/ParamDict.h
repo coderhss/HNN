@@ -4,7 +4,7 @@
 
 #ifndef HNN_PARAMDICT_H
 #define HNN_PARAMDICT_H
-#include "common.h"
+#include "common.hpp"
 #include "DataReader.h"
 #define HNN_MAX_PARAM_COUNT 32
 namespace HNN {
