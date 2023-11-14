@@ -16,7 +16,7 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    ErrorCode ReLU::inference(TensorPtr input, TensorPtr output) {
+    ErrorCode ReLU::inference(TensorPtr input, TensorPtr& output) {
         return Layer::inference(input, output);
     }
 

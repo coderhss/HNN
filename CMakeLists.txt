@@ -25,6 +25,7 @@ message(${CMAKE_CURRENT_SOURCE_DIR}/common/thirdparty/opencv/linux-x86/lib)
 target_link_libraries(HNN PUBLIC -Wl,--start-group common engine operator -Wl,--end-group)
 
 if (BUILD_TEST STREQUAL ON)
+    set(CMAKE_BUILD_TYPE Debug)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/operator/test/MNN/include)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/operator/test/MNN/include/MNN)
     file(GLOB_RECURSE src_file ${CMAKE_CURRENT_SOURCE_DIR}/operator/test/naive/*.cpp)

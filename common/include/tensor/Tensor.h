@@ -27,6 +27,14 @@ namespace HNN {
             this->setInited(init() == ErrorCode::NN_OK);
         }
 
+        Tensor(const void* virt_ptr,
+           const void* phy_ptr,
+           const ShapeVector &shape,
+           const MemoryType &memType = MemoryType::MEM_ON_CPU,
+           const DataType &dataType = DataType::HNN_FLOAT32): TensorBase(virt_ptr, phy_ptr, shape, memType, dataType) {
+            this->setInited(init() == ErrorCode::NN_OK);
+           };
+
         void setProperty(ShapeVector& shape, uint32_t& stride, uint32_t& nscalar, uint32_t& size) override;
 
         inline const MemFormat getMemoryFormat() const {

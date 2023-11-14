@@ -15,9 +15,9 @@ namespace HNN {
 
         ErrorCode loadModel(ModelBinPtr modelBin) override;
 
-        ErrorCode inference(TensorPtr input, TensorPtr output) override;
+        ErrorCode inference(TensorPtr input, TensorPtr& output) override;
 
-        ErrorCode runImpl(TensorPtr input, TensorPtr output, std::shared_ptr< OpParam > param) override;
+        ErrorCode runImpl(TensorPtr input, TensorPtr& output, std::shared_ptr< OpParam > param) override;
 
         struct ConvolutionParam : public OpParam {
             uint32_t kernelWidth{0};

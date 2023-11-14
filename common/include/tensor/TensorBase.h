@@ -10,7 +10,7 @@
 #include "DataManagerBase.h"
 #include "core/DataType.h"
 namespace HNN {
-    using ShapeVector = std::vector< int32_t >;
+    using ShapeVector = std::vector< uint32_t >;
 
     class TensorBase {
     public:
@@ -50,6 +50,15 @@ namespace HNN {
             }
             uint8_t* data = static_cast< uint8_t* >(mDataManagerPtr->getData());
             return (T*)data;
+        }
+
+        template< typename T > inline T* getDataOfChannel(const uint32_t c) const {
+            if (c >= mShape[1] || mDataManagerPtr == nullptr) {
+                LOG_E("input channel error {} vs {}", c, mShape[1]);
+                return nullptr;
+            }
+            T* data = static_cast< T* >(mDataManagerPtr->getData());
+            return &data[c * mShape[2] * mShape[3]];
         }
 
     protected:

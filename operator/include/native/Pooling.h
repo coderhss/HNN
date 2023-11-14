@@ -13,9 +13,9 @@ namespace HNN {
 
         ErrorCode loadModel(ModelBinPtr modelBin) override;
 
-        ErrorCode inference(TensorPtr input, TensorPtr output) override;
+        ErrorCode inference(TensorPtr input, TensorPtr& output) override;
 
-        ErrorCode runImpl(TensorPtr input, TensorPtr output, ParamPtr param);
+        ErrorCode runImpl(TensorPtr input, TensorPtr& output, ParamPtr param);
 
         struct PoolParam : public OpParam {
             int pooling_type{0};    // 0

@@ -12,6 +12,10 @@ public:
 protected:
     void SetUp() override {
         layer = CommonFactory< HNN::Layer >::getInstance().Create("Convolution");
+        if (layer != nullptr) {
+            std::cout << "no null" << std::endl;
+        }
+        pool_layer = CommonFactory< HNN::Layer >::getInstance().Create("Pooling");
         
     }
 
@@ -59,12 +63,31 @@ protected:
             }
             std::cout << std::endl;
         }
+        std::vector< uint32_t > shape{1, 1, 8, 8};
+        auto tensor = std::make_shared< HNN::Tensor >(inputData.data(), inputData.data(), shape);
+        HNN::ParamDict pd;
+        pd.set(0, 0);
+        pd.set(1, 2);
+        pd.set(2, 2);
+        pd.set(8, 4);
+        pd.set(18, 4);
+        
+        HNN::TensorPtr out_tensor;
+        pool_layer->loadParam(pd);
+        pool_layer->inference(tensor, out_tensor);
 
-        return HNN::ErrorCode::NN_FAILED;
+        float* data = out_tensor->getData< float >();
+
+        for (uint32_t i = 0; i < 16; ++i) {
+            std::cout << data[i] << " " << std::endl;
+        }
+
+        return HNN::ErrorCode::NN_OK;
     }
 
 private:
     HNN::LayerPtr layer;
+    HNN::LayerPtr pool_layer;
 };
 
 

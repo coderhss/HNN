@@ -85,22 +85,32 @@ namespace HNN {
         if (params[id] == nullptr) {
             return defaultValue;
         }
-        return params[id]->type ? params[id]->intValue : defaultValue;
+        return params[id]->type == 2? params[id]->intValue : defaultValue;
     }
 
     float ParamDict::get(int id, float defaultValue) const {
         if (params[id] == nullptr) {
             return defaultValue;
         }
-        return params[id]->type ? params[id]->floatValue : defaultValue;
+        return params[id]->type == 3? params[id]->floatValue : defaultValue;
     }
 
     void ParamDict::set(int id, int value) {
-
+        if (params[id] == nullptr) {
+            auto tmp = std::make_shared< Param >();
+            params[id] = tmp;
+        }
+        params[id]->intValue = value;
+        params[id]->type = 2;
     }
 
     void ParamDict::set(int id, float value) {
-
+        if (params[id] == nullptr) {
+            auto tmp = std::make_shared< Param >();
+            params[id] = tmp;
+        }
+        params[id]->floatValue = value;
+        params[id]->type = 3;
     }
 
     ErrorCode ParamDict::loadParam(DataReaderPtr dataReader) {

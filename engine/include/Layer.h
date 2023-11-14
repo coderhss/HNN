@@ -22,9 +22,9 @@ namespace HNN {
 
         virtual ErrorCode loadModel(ModelBinPtr modelBin);
 
-        virtual ErrorCode inference(TensorPtr input, TensorPtr output);
+        virtual ErrorCode inference(TensorPtr input, TensorPtr& output);
 
-        virtual ErrorCode runImpl(TensorPtr input, TensorPtr output, std::shared_ptr< OpParam > param) { return ErrorCode::NN_OK; };
+        virtual ErrorCode runImpl(TensorPtr input, TensorPtr& output, std::shared_ptr< OpParam > param) { return ErrorCode::NN_OK; };
 
         std::string type;
 

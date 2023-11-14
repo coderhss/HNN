@@ -14,7 +14,7 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    ErrorCode Dropout::inference(TensorPtr input, TensorPtr output) {
+    ErrorCode Dropout::inference(TensorPtr input, TensorPtr& output) {
         return Layer::inference(input, output);
     }
 }

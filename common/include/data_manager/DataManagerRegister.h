@@ -5,7 +5,7 @@
 #ifndef HNN_DATAMANAGERREGISTER_H
 #define HNN_DATAMANAGERREGISTER_H
 #include "core/CommonFactory.h"
-#include "common.h"
+#include "common.hpp"
 #include "DataManagerBase.h"
 #include "DataManagerCommon.h"
 

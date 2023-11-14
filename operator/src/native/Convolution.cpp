@@ -28,12 +28,12 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    ErrorCode Convolution::inference(TensorPtr input, TensorPtr output) {
+    ErrorCode Convolution::inference(TensorPtr input, TensorPtr& output) {
         runImpl(input, output, param);
         return Layer::inference(input, output);
     }
 
-    ErrorCode Convolution::runImpl(HNN::TensorPtr input, HNN::TensorPtr output, std::shared_ptr<OpParam> param) {
+    ErrorCode Convolution::runImpl(HNN::TensorPtr input, HNN::TensorPtr& output, std::shared_ptr<OpParam> param) {
         return ErrorCode::NN_OK;
     }
 
