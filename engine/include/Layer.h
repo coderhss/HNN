@@ -7,6 +7,7 @@
 #include "Blob.h"
 #include "ParamDict.h"
 #include "ModelBin.h"
+#include "Config.h"
 
 namespace HNN {
     class Layer {
@@ -22,9 +23,9 @@ namespace HNN {
 
         virtual ErrorCode loadModel(ModelBinPtr modelBin);
 
-        virtual ErrorCode inference(TensorPtr input, TensorPtr& output);
+        virtual ErrorCode inference(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config);
 
-        virtual ErrorCode runImpl(TensorPtr input, TensorPtr& output, std::shared_ptr< OpParam > param) { return ErrorCode::NN_OK; };
+        virtual ErrorCode runImpl(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config) { return ErrorCode::NN_OK; };
 
         std::string type;
 

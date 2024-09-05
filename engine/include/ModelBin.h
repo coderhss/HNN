@@ -4,6 +4,7 @@
 
 #ifndef HNN_MODELBIN_H
 #define HNN_MODELBIN_H
+#include "DataManagerRegister.h"
 #include "DataReader.h"
 #include "Tensor.h"
 namespace HNN {

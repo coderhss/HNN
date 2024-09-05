@@ -14,6 +14,7 @@
 #include "Split.h"
 #include "Concat.h"
 #include "Dropout.h"
+#include "Padding.h"
 
 REGISTER_COMMON_ENGINE(HNN, Input, Layer, Input);
 REGISTER_COMMON_ENGINE(HNN, Convolution, Layer, Convolution);
@@ -23,5 +24,6 @@ REGISTER_COMMON_ENGINE(HNN, Softmax, Layer, Softmax);
 REGISTER_COMMON_ENGINE(HNN, Split, Layer, Split);
 REGISTER_COMMON_ENGINE(HNN, Dropout, Layer, Dropout);
 REGISTER_COMMON_ENGINE(HNN, Concat, Layer, Concat);
+REGISTER_COMMON_ENGINE(HNN, Padding, Layer, Padding);
 
 #endif //HNN_NATIVEREGISTOR_H

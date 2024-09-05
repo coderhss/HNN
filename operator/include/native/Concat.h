@@ -12,7 +12,7 @@ namespace HNN {
 
         ErrorCode loadModel(ModelBinPtr modelBin) override;
 
-        ErrorCode inference(TensorPtr input, TensorPtr& output) override;
+        ErrorCode inference(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config) override;
 
         uint32_t axis{0};
 

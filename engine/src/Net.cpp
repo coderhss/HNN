@@ -3,7 +3,7 @@
 //
 #include "Net.h"
 namespace HNN {
-    ErrorCode Net::loadParam(FilePtr file) {
+    ErrorCode NetBase::loadParam(FilePtr file) {
         DataReaderPtr dataReader = std::shared_ptr< DataReader >(new DataReaderFromStdio(file));
         auto ret = loadParam(dataReader);
         if (ret != ErrorCode::NN_OK) {
@@ -13,7 +13,7 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    ErrorCode Net::loadParam(const std::string &filePath) {
+    ErrorCode NetBase::loadParam(const std::string &filePath) {
         FILE* filePointer = fopen(filePath.c_str(), "rb");
         if (filePointer == nullptr) {
             LOG_E("open file {} filed.", filePath);
@@ -34,7 +34,7 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    ErrorCode Net::loadParam(DataReaderPtr dataReader) {
+    ErrorCode NetBase::loadParam(DataReaderPtr dataReader) {
 #define SCAN_VALUE(fmt, data)                                       \
         do {                                                        \
             if (dataReader->scan(fmt, &data) != ErrorCode::NN_OK) { \
@@ -131,7 +131,7 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    int Net::getIndexFromBlobName(const std::string &name) {
+    int NetBase::getIndexFromBlobName(const std::string &name) {
         LOG_D("find index of blob name: {}", name);
         if (this->blobName2Index.find(name) == this->blobName2Index.end()) {
             LOG_E("cannot find blob by name {}.", name);
@@ -140,16 +140,20 @@ namespace HNN {
         return this->blobName2Index.at(name);
     }
 
-    BlobPtr Net::getBlobFromName(const std::string &name) {
+    BlobPtr NetBase::getBlobFromName(const std::string &name) {
         auto index = getIndexFromBlobName(name);
-        if (index == -1 || index >= this->blobs.size()) {
-            LOG_D("index is invalid, index: {}, blob size: {}", index, blobs.size());
+        return getBlobFromIndex(index);
+    }
+
+    BlobPtr NetBase::getBlobFromIndex(uint32_t index) {
+        if (index >= this->blobs.size()) {
+            LOG_E("index is invalid, index: {}, blob size: {}", index, blobs.size());
             return nullptr;
         }
         return blobs.at(index);
     }
 
-    ErrorCode Net::loadModel(FilePtr file) {
+    ErrorCode NetBase::loadModel(FilePtr file) {
         DataReaderPtr dataReader = std::make_shared< DataReaderFromStdio >(file);
         auto ret = loadModel(dataReader);
         if (ret != ErrorCode::NN_OK) {
@@ -159,7 +163,7 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    ErrorCode Net::loadModel(const std::string &filePath) {
+    ErrorCode NetBase::loadModel(const std::string &filePath) {
         FILE* filePointer = std::fopen(filePath.c_str(), "rb");
         if (filePointer == nullptr) {
             LOG_E("model file {} open failed.", filePath);
@@ -181,7 +185,7 @@ namespace HNN {
         }
     }
 
-    ErrorCode Net::loadModel(DataReaderPtr dataReader) {
+    ErrorCode NetBase::loadModel(DataReaderPtr dataReader) {
         if (layers.empty()) {
             LOG_E("layer is empty, please call loadParam before loadModel.");
             return ErrorCode::NN_FAILED;
@@ -203,5 +207,17 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
+    LayerPtr NetBase::getLayerFromIndex(uint32_t layerIndex) {
+        int len = layers.size();
+        if (layerIndex >= len) {
+            LOG_E("the index is out of range. size is {}, index is {}.", len, layerIndex);
+            return nullptr;
+        }
+        return layers[layerIndex];
+    }
+    
+    std::shared_ptr<Executer> Net::getExecuter() {
+        return std::make_shared< Executer >(this);
+    }
 
 }

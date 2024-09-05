@@ -44,6 +44,8 @@ namespace HNN {
 
         inline void setInited(const bool inited) { tensorInited = inited; };
 
+        inline uint32_t getNumber() const { return number; }
+
         template< typename T > inline T* getData(const uint32_t size = 0) const {
             if (mShape.empty() || mDataManagerPtr == nullptr) {
                 return nullptr;
@@ -60,6 +62,7 @@ namespace HNN {
             T* data = static_cast< T* >(mDataManagerPtr->getData());
             return &data[c * mShape[2] * mShape[3]];
         }
+        std::string mName = "";
 
     protected:
         ErrorCode init();
@@ -68,7 +71,6 @@ namespace HNN {
 
         MemoryType mMemoryType = MemoryType ::MEM_ON_CPU;
     private:
-        std::string mName = "";
         ShapeVector mShape;
         uint32_t number{0};
         uint32_t mSize{0};

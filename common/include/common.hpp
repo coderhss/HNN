@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include "core/ErrorCode.h"
 #include "core/CommonFactory.h"
+#include <algorithm>
+#include <cmath>
+#include <float.h>
 
 #define ALIGNMENT_32 32
 typedef unsigned short float16_t;

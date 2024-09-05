@@ -12,7 +12,7 @@ namespace HNN {
         return ErrorCode::NN_FAILED;
     }
 
-    ErrorCode Layer::inference(TensorPtr input, TensorPtr& output) {
+    ErrorCode Layer::inference(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config) {
         return ErrorCode::NN_FAILED;
     }
 }

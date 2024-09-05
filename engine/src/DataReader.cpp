@@ -8,7 +8,7 @@ namespace HNN {
     ErrorCode DataReaderFromStdio::scan(const std::string &format, void *data) const {
         int ret = fscanf(filePtr.get(), format.c_str(), data);
         if (ret <= 0) {
-            LOG_W("read data {} num is: {}",format, ret);
+            // LOG_W("read data {} num is: {}",format, ret);
             return ErrorCode::NN_FAILED;
         }
         return ErrorCode::NN_OK;

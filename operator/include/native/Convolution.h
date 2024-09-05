@@ -15,13 +15,17 @@ namespace HNN {
 
         ErrorCode loadModel(ModelBinPtr modelBin) override;
 
-        ErrorCode inference(TensorPtr input, TensorPtr& output) override;
+        ErrorCode inference(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config) override;
 
-        ErrorCode runImpl(TensorPtr input, TensorPtr& output, std::shared_ptr< OpParam > param) override;
+        ErrorCode runImpl(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config) override;
+
+        ErrorCode makePadding(TensorPtr& input, TensorPtr& output, const Config& config);
 
         struct ConvolutionParam : public OpParam {
             uint32_t kernelWidth{0};
             uint32_t kernelHeight{0};
+            uint32_t dilationWidth{0};
+            uint32_t dilationHeight{0};
             uint32_t outputNum{0};
             uint32_t inputNum{0};
             uint32_t padLeft{0};

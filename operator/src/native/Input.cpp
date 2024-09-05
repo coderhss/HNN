@@ -16,4 +16,19 @@ namespace HNN {
     ErrorCode Input::loadModel(ModelBinPtr modelBin) {
         return ErrorCode::NN_OK;
     }
+
+    ErrorCode Input::inference(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config) {
+        uint32_t inNum = input.size();
+        uint32_t outNum = output.size();
+        if (inNum != outNum) {
+            LOG_E("input num: {} != output num: {}", inNum, outNum);
+            return ErrorCode::NN_FAILED;
+        }
+
+        for (uint32_t i = 0; i < inNum; ++i) {
+            output[i] = input[i];
+        }
+
+        return ErrorCode::NN_OK;
+    }
 }

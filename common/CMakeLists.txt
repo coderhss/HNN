@@ -17,4 +17,4 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/allocator)
 #target_include_directories(${target_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/tensor)
 
 add_subdirectory(thirdparty)
-target_link_libraries(${target_name} PUBLIC spdlog gtest)
+target_link_libraries(${target_name} PUBLIC spdlog gtest opencv_entry)

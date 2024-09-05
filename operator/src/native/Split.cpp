@@ -11,7 +11,10 @@ namespace HNN {
         return ErrorCode::NN_OK;
     }
 
-    ErrorCode Split::inference(TensorPtr input, TensorPtr& output) {
-        return Layer::inference(input, output);
+    ErrorCode Split::inference(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config) {
+        for (uint32_t i = 0; i < output.size(); ++i) {
+            output[i] = input[0];
+        }
+        return ErrorCode::NN_OK;
     }
 }

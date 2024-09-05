@@ -13,9 +13,11 @@ namespace HNN {
 
         ErrorCode loadModel(ModelBinPtr modelBin) override;
 
-        ErrorCode inference(TensorPtr input, TensorPtr& output) override;
+        ErrorCode inference(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config) override;
 
-        ErrorCode runImpl(TensorPtr input, TensorPtr& output, ParamPtr param);
+        ErrorCode runImpl(std::vector<TensorPtr>& input, std::vector<TensorPtr>& output, const Config& config);
+
+        ErrorCode makePadding(TensorPtr& input, TensorPtr& output, const Config& config);
 
         struct PoolParam : public OpParam {
             int pooling_type{0};    // 0

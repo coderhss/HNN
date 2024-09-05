@@ -47,12 +47,12 @@ protected:
         // }
         ::memcpy(input->writeMap<float>(), inputData.data(), inputData.size() * sizeof(float));
         auto in_ptr = input->readMap< float >();
-        for (uint32_t i = 0; i < 8; ++ i) {
-            for (uint32_t j = 0; j < 8; ++ j) {
-                std::cout << *(in_ptr + i * 8 + j) << ", ";
-            }
-            std::cout << std::endl;
-        }
+        // for (uint32_t i = 0; i < 8; ++ i) {
+        //     for (uint32_t j = 0; j < 8; ++ j) {
+        //         std::cout << *(in_ptr + i * 8 + j) << ", ";
+        //     }
+        //     std::cout << std::endl;
+        // }
         std::vector< int > k = {2, 2};
         auto res = _MaxPool(input, k, {2, 2});
         auto ptr = res->readMap<float>();
@@ -72,11 +72,13 @@ protected:
         pd.set(8, 4);
         pd.set(18, 4);
         
-        HNN::TensorPtr out_tensor;
+        std::vector<HNN::TensorPtr> out_tensor(1);
+        std::vector<HNN::TensorPtr> in_tensor{tensor};
+        HNN::Config config;
         pool_layer->loadParam(pd);
-        pool_layer->inference(tensor, out_tensor);
+        pool_layer->inference(in_tensor, out_tensor, config);
 
-        float* data = out_tensor->getData< float >();
+        float* data = out_tensor[0]->getData< float >();
 
         for (uint32_t i = 0; i < 16; ++i) {
             std::cout << data[i] << " " << std::endl;

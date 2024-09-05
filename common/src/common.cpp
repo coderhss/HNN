@@ -8,7 +8,7 @@ static std::mutex mtx;
 void *alignedMalloc(unsigned long size, int alignment) {
     const int pointerSize = sizeof(void *);
     const int requestSize = size + alignment - 1 + pointerSize;
-    void *raw = malloc(requestSize);
+    void *raw = calloc(requestSize, 1);
     if (raw == nullptr) {
         LOG_E("aligned malloc is null.");
         return nullptr;
